@@ -10,11 +10,11 @@ export default function App() {
   const [lastNumber, setLastNumber] = useState("")
 
 
-  function calculator(fullEquation) {
+  function calculator(currentEquation) {
 
-    setLastNumber(fullEquation)
+    setLastNumber(currentEquation)
 
-    const splitNumbers = fullEquation.split(' ')
+    const splitNumbers = currentEquation.split(' ')
     const fistNumber = parseFloat(splitNumbers[0])
     const finalNumber = parseFloat(splitNumbers[2])
     const operator = splitNumbers[1]
@@ -34,6 +34,30 @@ export default function App() {
         setCurrentNumber((fistNumber / finalNumber).toString())
         return
     }
+  }
+
+  function calculatePercent(currentEquation) {
+    const splitNumbers = currentEquation.split(' ')
+    if (splitNumbers.length != 2)
+      return;
+
+    const fistNumber = parseFloat(splitNumbers[0])
+    const operator = splitNumbers[1]
+    let result = 0.0;
+
+    switch (operator) {
+      case '+':
+      case '-':
+        result = fistNumber * parseFloat(currentNumber) / 100
+        break
+      case 'x':
+      case '/':
+        result = parseFloat(currentNumber) / 100
+        break
+    }
+
+    setLastNumber(lastNumber + " " + result.toString())
+    setCurrentNumber("")
   }
 
   function handleInput(buttonPressed) {
@@ -56,6 +80,9 @@ export default function App() {
         return
       case '=':
         calculator(lastNumber + " " + currentNumber + " = ")
+        return
+      case '%':
+        calculatePercent(lastNumber)
         return
       case '+/-':
         return
