@@ -85,6 +85,7 @@ export default function App() {
         calculatePercent(lastNumber)
         return
       case '+/-':
+        setCurrentNumber(parseFloat(currentNumber) * -1)
         return
     }
 
