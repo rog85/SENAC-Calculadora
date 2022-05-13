@@ -12,12 +12,15 @@ export default function App() {
 
   function calculator(currentEquation) {
 
-    setLastNumber(currentEquation)
-
     const splitNumbers = currentEquation.split(' ')
     const fistNumber = parseFloat(splitNumbers[0])
     const finalNumber = parseFloat(splitNumbers[2])
     const operator = splitNumbers[1]
+
+    if (splitNumbers.length != 3 || currentNumber.length < 1)
+      return
+
+    setLastNumber(currentEquation + " = ")
 
     // Faz ação referente tecla pressionada
     switch (operator) {
@@ -38,7 +41,7 @@ export default function App() {
 
   function calculatePercent(currentEquation) {
     const splitNumbers = currentEquation.split(' ')
-    if (splitNumbers.length != 2)
+    if (splitNumbers.length != 2 || currentNumber.length < 1)
       return;
 
     const fistNumber = parseFloat(splitNumbers[0])
@@ -56,8 +59,7 @@ export default function App() {
         break
     }
 
-    setLastNumber(lastNumber + " " + result.toString())
-    setCurrentNumber("")
+    setCurrentNumber(result.toString())
   }
 
   function handleInput(buttonPressed) {
@@ -68,8 +70,10 @@ export default function App() {
       case '-':
       case 'x':
       case '/':
-        setLastNumber(currentNumber + " " + buttonPressed)
-        setCurrentNumber("")
+        if (currentNumber.length > 0) {
+          setLastNumber(currentNumber + " " + buttonPressed)
+          setCurrentNumber("")
+        }
         return
       case 'DEL':
         setCurrentNumber(currentNumber.substring(0, (currentNumber.length - 1)))
@@ -79,14 +83,19 @@ export default function App() {
         setCurrentNumber("")
         return
       case '=':
-        calculator(lastNumber + " " + currentNumber + " = ")
+        calculator(lastNumber + " " + currentNumber)
         return
       case '%':
         calculatePercent(lastNumber)
         return
       case '+/-':
-        setCurrentNumber(parseFloat(currentNumber) * -1)
+        if (currentNumber.length > 0) {
+          setCurrentNumber((parseFloat(currentNumber) * -1).toString())
+        }
         return
+      case '.':
+        if (currentNumber.includes('.'))
+          return
     }
 
     setCurrentNumber(currentNumber + buttonPressed)
