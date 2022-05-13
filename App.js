@@ -96,6 +96,11 @@ export default function App() {
       case '.':
         if (currentNumber.includes('.'))
           return
+        break
+      case 0:
+        if (currentNumber.charAt(0) == '0' && !currentNumber.includes('.'))
+          return
+        break
     }
 
     setCurrentNumber(currentNumber + buttonPressed)
