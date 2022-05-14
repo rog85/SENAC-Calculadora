@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function App() {
   // Mapeamento de teclas
-  const buttons = [7, 8, 9, 'LIMPAR', 'DEL', 4, 5, 6, '/', 'x', 1, 2, 3, '+', '-', '+/-', 0, '.', '%', '=']
+  const buttons = ['LIMPAR', 'DEL', '%', '/', 7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '+/-', '=']
 
   const [currentNumber, setCurrentNumber] = useState("")
   const [lastNumber, setLastNumber] = useState("")
@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: 90,
-    minHeight: 90,
+    minWidth: 100,
+    minHeight: 100,
     flex: 2,
   },
   textButton: {
