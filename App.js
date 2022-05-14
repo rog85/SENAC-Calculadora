@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function App() {
   // Mapeamento de teclas
-  const buttons = ['LIMPAR', 'DEL', '%', '/', 7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '+/-', '=']
+  const buttons = ['LIMPAR', 'DEL', '%', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '+/-', '=']
 
   const [currentNumber, setCurrentNumber] = useState("")
   const [lastNumber, setLastNumber] = useState("")
@@ -30,7 +30,7 @@ export default function App() {
       case '-':
         setCurrentNumber((fistNumber - finalNumber).toString())
         return
-      case 'x':
+      case '*':
         setCurrentNumber((fistNumber * finalNumber).toString())
         return
       case '/':
@@ -53,7 +53,7 @@ export default function App() {
       case '-':
         result = fistNumber * parseFloat(currentNumber) / 100
         break
-      case 'x':
+      case '*':
       case '/':
         result = parseFloat(currentNumber) / 100
         break
@@ -68,7 +68,7 @@ export default function App() {
     switch (buttonPressed) {
       case '+':
       case '-':
-      case 'x':
+      case '*':
       case '/':
         if (currentNumber.length > 0) {
           setLastNumber(currentNumber + " " + buttonPressed)
